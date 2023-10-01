@@ -22,7 +22,7 @@ def left_channel(update, context):
     context.bot.kick_chat_member(chat_id=update.effective_chat.id, user_id=user_id)
 
 # Add handlers to the dispatcher
-start_handler = MessageHandler(filters.command & filters.regex('^/start$'), start)
+start_handler = MessageHandler(filters.COMMAND & filters.regex('^/start$'), start)
 left_channel_handler = MessageHandler(Filters.status_update.left_chat_member, left_channel)
 dispatcher.add_handler(start_handler)
 dispatcher.add_handler(left_channel_handler)
