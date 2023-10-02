@@ -32,6 +32,15 @@ async def help(event):
     # Send a help message to the user with the inline keyboard
     await event.respond('This is a help message. Click "Back" to go back to start.', buttons=buttons)
 
+# Register an event handler for handling button clicks
+@client.on(events.CallbackQuery)
+async def handle_button_click(event):
+    if event.data == b'help':
+        await client.send_message(event.chat_id, 'You clicked the Help button!')
+    elif event.data == b'back':
+        # Execute the /start command when the "Back" button is clicked
+        await start(event)
+
 
 
 
