@@ -1,31 +1,20 @@
-import logging
-from telegram.ext import Updater, MessageHandler, Filters
+import telebot
 
-# Set up logging
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                     level=logging.INFO)
+# Replace 'YOUR_TOKEN' with your actual Telegram Bot token
+bot = telebot.TeleBot('5449793938:AAGlcRydVK08XQ9fBM0d4Pxzm0yEJR898Kg')
 
-# Define your bot token
-TOKEN = '5449793938:AAHM0rf-LCD-FU2VZ-aNEtpq4wgCQPLrUDA'
-
-# Create an updater object
-updater = Updater(token=TOKEN, use_context=True)
-dispatcher = updater.dispatcher
-
-# Define the handler function for the /start command
-def start(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text="Hello! I'm your bot.")
-
-# Define the handler function for when a user leaves the channel
-def left_channel(update, context):
-    user_id = update.message.left_chat_member.id
-    context.bot.kick_chat_member(chat_id=update.effective_chat.id, user_id=user_id)
-
-# Add handlers to the dispatcher
-start_handler = MessageHandler(Filters.command & Filters.regex('^/start$'), start)
-left_channel_handler = MessageHandler(Filters.status_update.left_chat_member, left_channel)
-dispatcher.add_handler(start_handler)
-dispatcher.add_handler(left_channel_handler)
-
+@bot.message_handler(content_types=['new_chat_members'])
+def handle_new_member(message):
+    # Check if the new member is leaving the channel
+    if message.left_chat_member:
+        user_id = message.left_chat_member.id
+        chat_id = message.chat.id
+        
+        # Ban the user from the channel
+        bot.kick_chat_member(chat_id, user_id)
+        
+        # Send a message to notify about the ban
+        bot.send_message(chat_id, f"User {user_id} has been banned.")
+        
 # Start the bot
-updater.start_polling()
+bot.polling()
