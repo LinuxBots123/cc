@@ -9,7 +9,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 
     # Create the Updater and pass in your bot toke
-updater = Updater("6535562523:AAHFC8-D3qd2M2FBI4Tv9FJaN4Jsuq3emCs")
+updater = Updater("6554753630:AAFykeOjMMiCfCgv8AVPBuXHAm8swEdSVMM")
 dispatcher = updater.dispatcher
 
 # Define the start command handler
