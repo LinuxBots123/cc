@@ -24,17 +24,15 @@ async def start(event):
     buttons = [[Button.inline("Help", b'help')]]
     await event.respond('Welcome to my bot!', buttons=buttons)
 
-@client.on(events.NewMessage(pattern='/help'))
-async def help(event):
-    await event.respond('This is a help message.')
-
 # Register an event handler for the /help command
 @client.on(events.NewMessage(pattern='/help'))
 async def help(event):
     # Create an inline keyboard with a "Back" button
     buttons = [[Button.inline("Back", b'back')]]
-    
-
     # Send a help message to the user with the inline keyboard
     await event.respond('This is a help message. Click "Back" to go back to start.', buttons=buttons)
+
+
+
+
 client.run_until_disconnected()
