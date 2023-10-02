@@ -36,7 +36,7 @@ async def start_command(event):
 
 @client.on(events.CallbackQuery)
 async def handle_button_click(event):
-    if event.data == b'membership_check':
+    if event.data.decode() == 'membership_check':
         # Check if the user is a member of a specific channel or chat
         chat_username = 'LegendxTricks'
         user_id = event.sender_id
