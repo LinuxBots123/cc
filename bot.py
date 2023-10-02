@@ -20,5 +20,17 @@ async def handle_chat_action(event):
         except Exception as e:
             print(f"Failed to ban user: {e}")
 
+    @client.on(events.NewMessage(pattern='/start'))
+async def start(event):
+    # Send the image with caption
+    await client.send_file(event.chat_id, 'https://ibb.co/tHQd2pp', caption='Welcome to my bot!')
+    
+    # Create the buttons
+    button1 = Button.url('𝗟𝗲𝗴𝗲𝗻𝗱𝘅𝗧𝗿𝗶𝗰𝗸𝘀', 't.me/LegendxTricks')
+    button2 = Button.url('𝗜𝗺𝗽𝗮𝗰𝘁 𝗪𝗼𝗿𝗹𝗱', 't.me/IMPACT_WORLD')
+    
+    # Create the message with buttons
+    message = await event.respond('Ｈｅｙ, Ｗｅｌｃｏｍｅ \n\nɪ ᴄᴀɴ ʙᴀɴ ᴜꜱᴇʀꜱ ᴡʜᴏ ʟᴇᴀᴠᴇꜱ ʏᴏᴜʀ ᴄʜᴀɴɴᴇʟ ɪɴ ʟᴇꜱꜱ 1ꜱᴇᴄ \n\nʜᴏᴡ ᴛᴏ ᴜꜱᴇ ᴛʜɪꜱ ʙᴏᴛ: /ʜᴇʟᴘ', buttons=[[button1, button2]])
+
 # Start the event loop
 client.run_until_disconnected()
