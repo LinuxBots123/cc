@@ -9,7 +9,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 TOKEN = '6535562523:AAHVrSvHKQq796SS6xFqbldkhhcXaCbE4OM'
 
 # Create an updater object
-updater = Updater(TOKEN=TOKEN, use_context=True)
+updater = Updater(6535562523:AAHVrSvHKQq796SS6xFqbldkhhcXaCbE4OM, use_context=True)
 dispatcher = updater.dispatcher
 
 # Define the handler function for the /start command
