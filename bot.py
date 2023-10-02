@@ -6,7 +6,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
                      level=logging.INFO)
 
 # Define your bot token
-TOKEN = 'your_bot_token'
+TOKEN = '6535562523:AAHVrSvHKQq796SS6xFqbldkhhcXaCbE4OM'
 
 # Create an updater object
 updater = Updater(token=TOKEN, use_context=True)
