@@ -5,7 +5,7 @@ from telethon.tl.types import ChannelParticipantsSearch
 # Replace the values below with your own API credentials
 api_id = 7630000
 api_hash = 'f70361ddf4ec755395b4b6f1ab2d4fae'
-bot_token = '6535562523:AAEFeSAJPHn5T8JfAobSWEZGWY3knka0d8w'
+bot_token = '5449793938:AAF3zXbjaXsV4bD4kslnxDsAyFHiB8pHtYs'
 
 # Create a TelegramClient instance
 client = TelegramClient('userbot_session', api_id, api_hash).start(bot_token=bot_token)
