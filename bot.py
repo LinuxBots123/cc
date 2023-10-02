@@ -1,26 +1,31 @@
-from telethon.sync import TelegramClient, events
+import logging
+from telegram.ext import Updater, MessageHandler, Filters
 
-# Replace 'YOUR_API_ID' and 'YOUR_API_HASH' with your actual API credentials
-api_id = '7630000'
-api_hash = 'f70361ddf4ec755395b4b6f1ab2d4fae'
+# Set up logging
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                     level=logging.INFO)
 
-# Replace 'YOUR_BOT_TOKEN' with your actual bot token
-bot_token = '6535562523:AAHVrSvHKQq796SS6xFqbldkhhcXaCbE4OM'
+# Define your bot token
+TOKEN = 'your_bot_token'
 
-# Replace 'YOUR_CHANNEL_USERNAME' with your actual channel username (e.g., @your_channel)
-channel_username = 'LegendxTricks'
+# Create an updater object
+updater = Updater(token=TOKEN, use_context=True)
+dispatcher = updater.dispatcher
 
-with TelegramClient('session_name', api_id, api_hash) as client:
-    @client.on(events.ChatAction)
-    async def handle_chat_action(event):
-        if event.user_joined or event.user_left:
-            user_id = event.user_id
-            chat_id = await client.get_entity(channel_username)
-            
-            try:
-                await client.kick_participant(chat_id, user_id)
-                print(f"User {user_id} has been banned from the chat.")
-            except Exception as e:
-                print(f"Failed to ban user: {e}")
-    
-    client.run_until_disconnected()
+# Define the handler function for the /start command
+def start(update, context):
+    context.bot.send_message(chat_id=update.effective_chat.id, text="Hello! I'm your bot.")
+
+# Define the handler function for when a user leaves the channel
+def left_channel(update, context):
+    user_id = update.message.left_chat_member.id
+    context.bot.kick_chat_member(chat_id=update.effective_chat.id, user_id=user_id)
+
+# Add handlers to the dispatcher
+start_handler = MessageHandler(Filters.command & Filters.regex('^/start$'), start)
+left_channel_handler = MessageHandler(Filters.status_update.left_chat_member, left_channel)
+dispatcher.add_handler(start_handler)
+dispatcher.add_handler(left_channel_handler)
+
+# Start the bot
+updater.start_polling()
