@@ -23,7 +23,7 @@ async def handle_chat_action(event):
 @client.on(events.NewMessage(pattern='/start'))
 async def start(event):
     # Send the image with caption
-    await client.send_file(event.chat_id, 'https://ibb.co/tHQd2pp', caption='Welcome to my bot!')
+    await client.send_file(event.chat_id, 'image/IMG_20221228_151355_100.jpg', caption='Welcome to my bot!')
     
     # Create the buttons
     button1 = Button.url('𝗟𝗲𝗴𝗲𝗻𝗱𝘅𝗧𝗿𝗶𝗰𝗸𝘀', 't.me/LegendxTricks')
