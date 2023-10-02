@@ -28,9 +28,13 @@ async def start(event):
 async def help(event):
     await event.respond('This is a help message.')
 
-@client.on(events.CallbackQuery)
-async def handle_button_click(event):
-    if event.data == b'help':
-        await event.answer('You clicked the Help button!')
+# Register an event handler for the /help command
+@client.on(events.NewMessage(pattern='/help'))
+async def help(event):
+    # Create an inline keyboard with a "Back" button
+    buttons = [[Button.inline("Back", b'back')]]
+    
 
+    # Send a help message to the user with the inline keyboard
+    await event.respond('This is a help message. Click "Back" to go back to start.', buttons=buttons)
 client.run_until_disconnected()
