@@ -1,37 +1,30 @@
-import requests
-import time
-import telebot
+import os
+from telegram.ext import Updater
 
-# Replace 'YOUR_BOT_TOKEN' with your actual bot token
-bot = telebot.TeleBot('5449793938:AAEbBiKgcwFDdF8bx3NRg1tES5TeOypsJLw')
+# Get the Telegram bot token from environment variable
+TOKEN = ('5449793938:AAEbBiKgcwFDdF8bx3NRg1tES5TeOypsJLw')
 
-# Replace 'YOUR_CHANNEL_USERNAME' with your actual channel username (e.g., @mychannel)
-channel_username = 'LegendxTricks'
+def start(update, context):
+    context.bot.send_message(chat_id=update.effective_chat.id, text="Hello! I'm your Telegram bot.")
 
-# Replace 'YOUR_CHAT_ID' with the chat ID where you want to send the new post link
-chat_id = '5488677608'
+def main():
+    # Create an instance of the Updater class with your bot token
+    updater = Updater(token=TOKEN, use_context=True)
 
-# Function to get the link of the latest post from your channel
-def get_latest_post_link():
-    url = f'https://api.telegram.org/bot{bot.token}/getChat'
-    params = {'chat_id': channel_username}
-    response = requests.get(url, params=params)
-    data = response.json()
+    # Get the dispatcher to register handlers
+    dispatcher = updater.dispatcher
+
+    # Register the start handler
+    dispatcher.add_handler(CommandHandler('start', start))
+
+    # Start the Bot
+    updater.start_webhook(listen="0.0.0.0", port=int(os.environ.get('PORT', '8443')), url_path=TOKEN)
     
-    if data['ok']:
-        latest_post_id = data['result']['last_message']['message_id']
-        return f'https://t.me/{channel_username}/{latest_post_id}'
-    
-    return None
+    # Set the webhook URL for Heroku deployment
+    updater.bot.setWebhook("https://your-heroku-app.herokuapp.com/" + TOKEN)
 
-# Function to send the latest post link to the specified chat ID
-def send_latest_post_link():
-    latest_post_link = get_latest_post_link()
-    
-    if latest_post_link:
-        bot.send_message(chat_id, latest_post_link)
+    # Run the bot until you press Ctrl-C or the process receives SIGINT, SIGTERM or SIGABRT
+    updater.idle()
 
-# Main loop to check for new posts every 10 seconds and send them if available
-while True:
-    send_latest_post_link()
-    time.sleep(10)
+if __name__ == '__main__':
+    main()
