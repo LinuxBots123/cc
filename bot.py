@@ -1,5 +1,5 @@
 from telethon.sync import TelegramClient, events
-from telethon.tl.types import InlineKeyboardMarkup, InlineKeyboardButton
+from telethon.tl.custom import Button
 
 # Replace the values below with your own API credentials
 api_id = 7630000
