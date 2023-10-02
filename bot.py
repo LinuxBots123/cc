@@ -1,7 +1,7 @@
 import telebot
 
 # Replace 'YOUR_BOT_TOKEN' with your actual bot token
-bot = telebot.TeleBot('6535562523:AAGrUeW5atwGtbX6_rbUqL5c1NNRwYoW7KU')
+bot = telebot.TeleBot('6554753630:AAG2wV-XPV7mfuD7eMJTxnyEfxsXHLt6PpI')
 
 @bot.channel_post_handler(content_types=['left_chat_member'])
 def handle_left_chat_member(message):
