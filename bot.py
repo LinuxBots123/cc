@@ -17,6 +17,6 @@ updater = Updater(bot_token, use_context=True)
 dispatcher = updater.dispatcher
 
 # Register the handler for new channel posts
-dispatcher.add_handler(MessageHandler(Filters.channel & Filters.update.channel_posts, handle_new_post))
+dispatcher.add_handler(MessageHandler(Filters.Channel & Filters.update.channel_posts, handle_new_post))
 # Start polling for updates
 updater.start_polling()
