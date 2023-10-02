@@ -1,12 +1,10 @@
 from telethon.sync import TelegramClient, events
 from telethon.tl.custom import Button
 
-# Replace the values below with your own API credentials
 api_id = 7630000
 api_hash = 'f70361ddf4ec755395b4b6f1ab2d4fae'
 bot_token = '6535562523:AAGGQ0ivPpUbDrFuGlJiJ5lN-qZNt6hyhDM'
 
-# Create a TelegramClient instance
 client = TelegramClient('userbot_session', api_id, api_hash).start(bot_token=bot_token)
 
 @client.on(events.ChatAction)
@@ -21,28 +19,18 @@ async def handle_chat_action(event):
         except Exception as e:
             print(f"Failed to ban user: {e}")
 
-#____________________________________________444
 @client.on(events.NewMessage(pattern='/start'))
-    async def start(event):
-        # Create an inline keyboard with a "Help" button
-        buttons = [[Button.inline("Help", b'help')]]
+async def start(event):
+    buttons = [[Button.inline("Help", b'help')]]
+    await event.respond('Welcome to my bot!', buttons=buttons)
 
-        # Send a welcome message to the user with the inline keyboard
-        await event.respond('Welcome to my bot!', buttons=buttons)
+@client.on(events.NewMessage(pattern='/help'))
+async def help(event):
+    await event.respond('This is a help message.')
 
-    # Register an event handler for the /help command
-    @client.on(events.NewMessage(pattern='/help'))
-    async def help(event):
-        # Send a help message to the user
-        await event.respond('This is a help message.')
+@client.on(events.CallbackQuery)
+async def handle_button_click(event):
+    if event.data == b'help':
+        await event.answer('You clicked the Help button!')
 
-    # Register an event handler for handling button clicks
-    @client.on(events.CallbackQuery)
-    async def handle_button_click(event):
-        if event.data == b'help':
-            # Send a help message when the "Help" button is clicked
-            await event.answer('You clicked the Help button!')
-
-#_______________________________________________
-# Start the event loop
 client.run_until_disconnected()
