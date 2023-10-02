@@ -36,7 +36,9 @@ async def help(event):
 @client.on(events.CallbackQuery)
 async def handle_button_click(event):
     if event.data == b'help':
-        await client.send_message(event.chat_id, 'You clicked the Help button!')
+        # Send a new message with the help text and back button
+        buttons = [[Button.inline("Back", b'back')]]
+        await client.send_message(event.chat_id, 'This is a help message. Click "Back" to go back to start.', buttons=buttons)
     elif event.data == b'back':
         # Execute the /start command when the "Back" button is clicked
         await start(event)
