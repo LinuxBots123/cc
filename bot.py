@@ -8,7 +8,7 @@ def handle_leave(update, context):
     chat_id = update.message.chat.id
     
     # Replace 'YOUR_CHANNEL_ID' with your actual channel ID
-    channel_id = 'YOUR_CHANNEL_ID'
+    channel_id = '-1001900546867'
     
     if chat_id == channel_id:
         context.bot.kick_chat_member(chat_id, user_id)
