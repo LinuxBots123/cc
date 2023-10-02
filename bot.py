@@ -1,5 +1,5 @@
 import os
-from telegram.ext import Updater
+from telegram.ext import Updater, CommandHandler
 
 # Get the Telegram bot token from environment variable
 TOKEN = ('5449793938:AAEbBiKgcwFDdF8bx3NRg1tES5TeOypsJLw')
