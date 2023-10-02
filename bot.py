@@ -3,7 +3,7 @@ from telethon.sync import TelegramClient, events
 # Replace the values below with your own API credentials
 api_id = 7630000
 api_hash = 'f70361ddf4ec755395b4b6f1ab2d4fae'
-bot_token = '6535562523:AAGGQ0ivPpUbDrFuGlJiJ5lN-qZNt6hyhDM'
+bot_token = '6535562523:AAEFeSAJPHn5T8JfAobSWEZGWY3knka0d8w'
 
 # Create a TelegramClient instance
 client = TelegramClient('userbot_session', api_id, api_hash).start(bot_token=bot_token)
@@ -46,7 +46,7 @@ async def handle_button_click(event):
                 
                 # Send a message with an inline link to another website
                 link_button = Button.url('Ｕｐｄａｔｅｓ ', 't.me/LegendxTricks')
-                await event.respond('Click on this link:', buttons=link_button)
+                await event.respond('Ｈｅｙ, Ｗｅｌｃｏｍｅ \n\nɪ ᴄᴀɴ ʙᴀɴ ᴜꜱᴇʀꜱ ᴡʜᴏ ʟᴇᴀᴠᴇꜱ ʏᴏᴜʀ ᴄʜᴀɴɴᴇʟ ɪɴ ʟᴇꜱꜱ 1ꜱᴇᴄ \n\nʜᴏᴡ ᴛᴏ ᴜꜱᴇ ᴛʜɪꜱ ʙᴏᴛ: /ʜᴇʟᴘ', buttons=link_button)
                 
             else:
                 await event.answer('You have not joined the chat.')
