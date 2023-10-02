@@ -1,10 +1,11 @@
 from telethon.sync import TelegramClient, events
-from telethon.tl.custom import Button
 
+# Replace the values below with your own API credentials
 api_id = 7630000
 api_hash = 'f70361ddf4ec755395b4b6f1ab2d4fae'
-bot_token = '6535562523:AAEFeSAJPHn5T8JfAobSWEZGWY3knka0d8w'
+bot_token = '6535562523:AAGGQ0ivPpUbDrFuGlJiJ5lN-qZNt6hyhDM'
 
+# Create a TelegramClient instance
 client = TelegramClient('userbot_session', api_id, api_hash).start(bot_token=bot_token)
 
 @client.on(events.ChatAction)
@@ -19,31 +20,40 @@ async def handle_chat_action(event):
         except Exception as e:
             print(f"Failed to ban user: {e}")
 
+#################
+
 @client.on(events.NewMessage(pattern='/start'))
-async def start(event):
-    buttons = [[Button.inline("Help", b'help')]]
-    await event.respond('Welcome to my bot!', buttons=buttons)
+async def start_command(event):
+    # Create a button for running the membership checker
+    button = Button.inline('Check Membership', data='membership_check')
+    
+    # Send a welcome message with the button when the /start command is used
+    await event.respond('🙋‍♂ Hello,\n➖➖➖➖➖➖➖➖➖➖➖➖➖\n🔎 You Have To Join Our Channels By Below Buttons In Order To Use Me !!! After Joined! Press On Joined To Continue.\n➖➖➖➖➖➖➖➖➖➖➖➖➖', buttons=button)
 
-# Register an event handler for the /help command
-@client.on(events.NewMessage(pattern='/help'))
-async def help(event):
-    # Create an inline keyboard with a "Back" button
-    buttons = [[Button.inline("Back", b'back')]]
-    # Send a help message to the user with the inline keyboard
-    await event.respond('This is a help message. Click "Back" to go back to start.', buttons=buttons)
-
-# Register an event handler for handling button clicks
 @client.on(events.CallbackQuery)
 async def handle_button_click(event):
-    if event.data == b'help':
-        # Send a new message with the help text and back button
-        buttons = [[Button.inline("Back", b'back')]]
-        await client.send_message(event.chat_id, 'This is a help message. Click "Back" to go back to start.', buttons=buttons)
-    elif event.data == b'back':
-        # Execute the /start command when the "Back" button is clicked
-        await start(event)
-
-
-
-
+    if event.data == b'membership_check':
+        # Check if the user is a member of a specific channel or chat
+        chat_username = 'LegendxTricks'
+        user_id = event.sender_id
+        
+        try:
+            # Get information about the user's membership in the chat
+            participant = await client.get_participant(chat_username, user_id)
+            
+            if participant:
+                await event.answer('You have joined the chat!')
+                
+                # Send a message with an inline link to another website
+                link_button = Button.url('Ｕｐｄａｔｅｓ ', 't.me/LegendxTricks')
+                await event.respond('Click on this link:', buttons=link_button)
+                
+            else:
+                await event.answer('You have not joined the chat.')
+        
+        except Exception as e:
+            print(e)
+            await event.answer('An error occurred while checking your membership.')
+            
+# Start the event loop
 client.run_until_disconnected()
