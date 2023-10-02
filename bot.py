@@ -18,10 +18,10 @@ def main():
     dispatcher.add_handler(CommandHandler('start', start))
 
     # Start the Bot
-    updater.start_webhook(listen="0.0.0.0", port=int(os.environ.get('PORT', '8443')), url_path=TOKEN)
+    updater.start_webhook(listen="0.0.0.0", port=int('8443'), url_path=TOKEN)
     
     # Set the webhook URL for Heroku deployment
-    updater.bot.setWebhook("https://your-heroku-app.herokuapp.com/" + TOKEN)
+    updater.bot.setWebhook("https://ghikhhg.herokuapp.com/" + TOKEN)
 
     # Run the bot until you press Ctrl-C or the process receives SIGINT, SIGTERM or SIGABRT
     updater.idle()
