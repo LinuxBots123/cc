@@ -1,38 +1,16 @@
-import logging
-from telegram.ext import Updater, MessageHandler, Filters, CommandHandler
-from logging import basicConfig, getLogger, INFO
+import telebot
 
-basicConfig(level=INFO)
-log = getLogger()
+# Replace 'YOUR_BOT_TOKEN' with your actual bot token
+bot = telebot.TeleBot('6535562523:AAGrUeW5atwGtbX6_rbUqL5c1NNRwYoW7KU')
 
-# Define your bot token
-TOKEN = '6535562523:AAFDMrN6BHg-vSs-nLrhHpRyksiddQV8sOk'
-
-# Create an updater object
-updater = Updater(token=TOKEN, use_context=True)
-dispatcher = updater.dispatcher
-
-# Define the handler function for the /start command
-def start(update, context):
-    update.message.reply_text(
-        "start this bot",
-        parse_mode="markdown")
-
-def help(update, context):
-    update.message.reply_text(
-        "help for this bot",
-        parse_mode="markdown")
-
-# Define the handler function for when a user leaves the channel
-def left_channel(update, context):
-    user_id = update.message.left_chat_member.id
-    context.bot.kick_chat_member(chat_id=update.effective_chat.id, user_id=user_id)
-
-# Add handlers to the dispatcher
-start_handler = MessageHandler(Filters.command & Filters.regex('^/start$'), start)
-left_channel_handler = MessageHandler(Filters.status_update.left_chat_member, left_channel)
-dispatcher.add_handler(start_handler)
-dispatcher.add_handler(left_channel_handler)
+@bot.channel_post_handler(content_types=['left_chat_member'])
+def handle_left_chat_member(message):
+    user_id = message.left_chat_member.id
+    chat_id = message.chat.id
+    
+    # Replace 'YOUR_CHANNEL_ID' with your actual channel ID
+    if chat_id == -1001900546867:  # Check if the user left from your channel
+        bot.kick_chat_member(chat_id, user_id)  # Ban the user from the channel
 
 # Start the bot
-updater.start_polling()
+bot.polling()
