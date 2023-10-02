@@ -1,4 +1,4 @@
-from telethon.sync import TelegramClient, events
+from telethon.sync import TelegramClient, events, Button
 
 # Replace the values below with your own API credentials
 api_id = 7630000
