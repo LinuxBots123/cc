@@ -1,9 +1,9 @@
 import logging
-from telegram.ext import Updater, MessageHandler, Filters
+from telegram.ext import Updater, MessageHandler, Filters, CommandHandler
+from logging import basicConfig, getLogger, INFO
 
-# Set up logging
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                     level=logging.INFO)
+basicConfig(level=INFO)
+log = getLogger()
 
 # Define your bot token
 TOKEN = '6535562523:AAFAw-u0ENKuMoe0sE7MT1RFwTLODQ35aso'
@@ -14,7 +14,14 @@ dispatcher = updater.dispatcher
 
 # Define the handler function for the /start command
 def start(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text="Hello! I'm your bot.")
+    update.message.reply_text(
+        "start this bot",
+        parse_mode="markdown")
+
+def help(update, context):
+    update.message.reply_text(
+        "help for this bot",
+        parse_mode="markdown")
 
 # Define the handler function for when a user leaves the channel
 def left_channel(update, context):
