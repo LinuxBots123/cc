@@ -30,6 +30,7 @@ dispatcher.add_handler(left_channel_handler)
 def main() -> None:
     # Create the Updater and pass in your bot token
     updater = Updater("6554753630:AAEgnJTiuEq_osKf3MBej3ksB1JS3_NUZ8c")
+  dispatcher = updater.dispatcher
     # Start the Bot
     updater.start_polling()
 
