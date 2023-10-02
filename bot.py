@@ -39,9 +39,9 @@ async def handle_button_click(event):
         
         try:
             # Get information about the user's membership in the chat
-            participant = await client.get_participant(chat_username, user_id)
+            participant = await client.get_chat_member(chat_username, user_id)
             
-            if participant:
+            if participant.status == 'member':
                 await event.answer('You have joined the chat!')
                 
                 # Send a message with an inline link to another website
