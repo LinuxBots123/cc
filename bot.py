@@ -20,7 +20,7 @@ async def handle_chat_action(event):
         except Exception as e:
             print(f"Failed to ban user: {e}")
 
-    @client.on(events.NewMessage(pattern='/start'))
+@client.on(events.NewMessage(pattern='/start'))
 async def start(event):
     # Send the image with caption
     await client.send_file(event.chat_id, 'https://ibb.co/tHQd2pp', caption='Welcome to my bot!')
