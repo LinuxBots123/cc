@@ -1,20 +1,24 @@
-import telebot
+from telethon.sync import TelegramClient, events
 
-# Replace 'YOUR_TOKEN' with your actual Telegram Bot token
-bot = telebot.TeleBot('5449793938:AAGlcRydVK08XQ9fBM0d4Pxzm0yEJR898Kg')
+# Replace the values below with your own API credentials
+api_id = 7630000
+api_hash = 'f70361ddf4ec755395b4b6f1ab2d4fae'
+bot_token = '6535562523:AAGGQ0ivPpUbDrFuGlJiJ5lN-qZNt6hyhDM'
 
-@bot.message_handler(content_types=['new_chat_members'])
-def handle_new_member(message):
-    # Check if the new member is leaving the channel
-    if message.left_chat_member:
-        user_id = message.left_chat_member.id
-        chat_id = message.chat.id
-        
-        # Ban the user from the channel
-        bot.kick_chat_member(chat_id, user_id)
-        
-        # Send a message to notify about the ban
-        bot.send_message(chat_id, f"User {user_id} has been banned.")
-        
-# Start the bot
-bot.polling()
+# Create a TelegramClient instance
+client = TelegramClient('userbot_session', api_id, api_hash).start(bot_token=bot_token)
+
+@client.on(events.ChatAction)
+async def handle_chat_action(event):
+    if event.user_joined:
+        print(f"User joined: {event.user_id}")
+    elif event.user_left:
+        print(f"User left: {event.user_id}")
+        try:
+            await client.edit_permissions(event.chat_id, event.user_id, view_messages=False)
+            print(f"Banned user: {event.user_id}")
+        except Exception as e:
+            print(f"Failed to ban user: {e}")
+
+# Start the event loop
+client.run_until_disconnected()
