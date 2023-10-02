@@ -29,17 +29,7 @@ dispatcher.add_handler(left_channel_handler)
 
 def main() -> None:
     # Create the Updater and pass in your bot token
-    updater = Updater("6554753630:AAFcrNNeTANaEp2SgB94sDmHy7meWww7pjk")
-
-    # Get the dispatcher to register handlers
-    dispatcher = updater.dispatcher
-
-    # Register the start command handler
-    dispatcher.add_handler(CommandHandler("start", start))
-
-    # Register the callback query handler for referrals
-    dispatcher.add_handler(CallbackQueryHandler(handle_referral))
-
+    updater = Updater("6554753630:AAEgnJTiuEq_osKf3MBej3ksB1JS3_NUZ8c")
     # Start the Bot
     updater.start_polling()
 
