@@ -8,8 +8,9 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 logger = logging.getLogger(__name__)
 
-# Define the referral dictionary to store referral codes and their corresponding users
-referral_dict = {}
+    # Create the Updater and pass in your bot toke
+updater = Updater("6535562523:AAEvGCPHhzQ_NXWmfvXGOtJQ-70pkBEZrtY")
+dispatcher = updater.dispatcher
 
 # Define the start command handler
 # Define the handler function for the /start command
@@ -28,9 +29,6 @@ dispatcher.add_handler(start_handler)
 dispatcher.add_handler(left_channel_handler)
 
 def main() -> None:
-    # Create the Updater and pass in your bot token
-    updater = Updater("6535562523:AAEvGCPHhzQ_NXWmfvXGOtJQ-70pkBEZrtY")
-    dispatcher = updater.dispatcher
     # Start the Bot
     updater.start_polling()
 
