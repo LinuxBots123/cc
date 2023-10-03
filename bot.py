@@ -6,7 +6,7 @@ import time
 # Replace the values below with your own API credentials
 api_id = 7630000
 api_hash = 'f70361ddf4ec755395b4b6f1ab2d4fae'
-bot_token = '6535562523:AAFRmq4zj43R-Tj5-WRhAvcG21kVNYvUUY0'
+bot_token = '6535562523:AAFcz97OIONgqQjIWO4q9lM2L8vmdgg2fJM'
 image_paths = ['image/img1.jpeg', 'image/img2.jpeg', 'image/img3.jpeg']
 
 # Create a TelegramClient instance
