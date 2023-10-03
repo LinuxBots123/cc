@@ -46,7 +46,7 @@ async def help(event):
     # Path to the image file
     image_path = random.choice(image_paths)
     # Caption for the image
-    caption2 = '𝗨𝘀𝗮𝗴𝗲 𝗶𝗻𝘀𝘁𝗿𝘂𝗰𝘁𝗶𝗼𝗻𝘀.\n\Aᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ᴄʜᴀɴɴᴇʟ ᴀꜱ ᴀᴅᴍɪɴɪꜱᴛʀᴀᴛᴏʀ, ᴡɪᴛʜ "ʙᴀɴ ᴜꜱᴇʀ" ᴘᴇʀᴍɪꜱꜱɪᴏɴ, ᴀɴᴅ ɪ ᴡɪʟʟ ɪɴꜱᴛᴀɴᴛʟʏ ꜱᴛᴀʀᴛ ᴍʏ ᴡᴏʀᴋ.'
+    caption2 = '𝗨𝘀𝗮𝗴𝗲 𝗶𝗻𝘀𝘁𝗿𝘂𝗰𝘁𝗶𝗼𝗻𝘀.\n\nAᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ᴄʜᴀɴɴᴇʟ ᴀꜱ ᴀᴅᴍɪɴɪꜱᴛʀᴀᴛᴏʀ, ᴡɪᴛʜ "ʙᴀɴ ᴜꜱᴇʀ" ᴘᴇʀᴍɪꜱꜱɪᴏɴ, ᴀɴᴅ ɪ ᴡɪʟʟ ɪɴꜱᴛᴀɴᴛʟʏ ꜱᴛᴀʀᴛ ᴍʏ ᴡᴏʀᴋ.'
     button3 = Button.url('𝗔𝗱𝗱 𝗠𝗲 𝗧𝗼 𝗬𝗼𝘂𝗿 𝗖𝗵𝗮𝗻𝗻𝗲𝗹', 'https://t.me/LxtBanBot?startchannel=xAaYux&admin=invite_users+manage_chat')
     
     # Send the message with the image and buttons
