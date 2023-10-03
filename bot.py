@@ -21,8 +21,10 @@ async def handle_chat_action(event):
         try:
             await client.edit_permissions(event.chat_id, event.user_id, view_messages=False)
             print(f"Banned user: {event.user_id}")
+            time.sleep(4)
         except Exception as e:
             print(f"Failed to ban user: {e}")
+            time.sleep(4)
 
 # Create a new TelegramClient instance
 @client.on(events.NewMessage(pattern='/start'))
@@ -38,7 +40,7 @@ async def start(event):
     
     # Send the message with the image and buttons
     await client.send_file(event.chat_id, file=image_path, caption=caption, buttons=[[button1, button2]])
-
+    time.sleep(3)
                              ####
 
 @client.on(events.NewMessage(pattern='/help'))
