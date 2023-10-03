@@ -30,7 +30,7 @@ async def handle_chat_action(event):
             # Get information about the user who added the bot to their channel
             participants = await client.get_participants(event.chat_id)
             for participant in participants:
-                if participant.bot and participant.username == "your_bot_username":
+                if participant.bot and participant.username == "LxtBanBot":
                     # Send a message to the user who added the bot
                     await send_banned_user_message(participant.id)
                     break
