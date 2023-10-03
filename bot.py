@@ -1,6 +1,7 @@
 from telethon.sync import TelegramClient, events
 from telethon import Button
 import random
+import time
 
 # Replace the values below with your own API credentials
 api_id = 7630000
@@ -38,6 +39,6 @@ async def start(event):
     # Send the message with the image and buttons
     await client.send_file(event.chat_id, file=image_path, caption=caption, buttons=[[button1, button2]])
 
-
+    time.sleep(3)
 # Start the event loop
 client.run_until_disconnected()
