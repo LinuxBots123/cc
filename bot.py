@@ -6,7 +6,7 @@ import time
 # Replace the values below with your own API credentials
 api_id = 7630000
 api_hash = 'f70361ddf4ec755395b4b6f1ab2d4fae'
-bot_token = '6535562523:AAEbY0hHMXro7hen5J6Zj47D1zHUGcrXmsM'
+bot_token = '6535562523:AAFRmq4zj43R-Tj5-WRhAvcG21kVNYvUUY0'
 image_paths = ['image/img1.jpeg', 'image/img2.jpeg', 'image/img3.jpeg']
 
 # Create a TelegramClient instance
@@ -35,7 +35,6 @@ async def start(event):
     # Create the URL buttons
     button1 = Button.url('𝗟𝗲𝗴𝗲𝗻𝗱𝘅𝗧𝗿𝗶𝗰𝗸𝘀', 't.me/LegendxTricks')
     button2 = Button.url('𝗜𝗺𝗽𝗮𝗰𝘁 𝗪𝗼𝗿𝗹𝗱', 't.me/IMPACT_WORLD')
-    button3 = Button.url('𝗔𝗱𝗱 𝗠𝗲 𝗧𝗼 𝗬𝗼𝘂𝗿 𝗖𝗵𝗮𝗻𝗻𝗲𝗹', 'https://t.me/LxtBanBot?startchannel=xAaYux&admin=invite_users+manage_chat')
     
     # Send the message with the image and buttons
     await client.send_file(event.chat_id, file=image_path, caption=caption, buttons=[[button1, button2]])
@@ -48,6 +47,7 @@ async def help(event):
     image_path = random.choice(image_paths)
     # Caption for the image
     caption2 = '𝗨𝘀𝗮𝗴𝗲 𝗶𝗻𝘀𝘁𝗿𝘂𝗰𝘁𝗶𝗼𝗻𝘀.\n\Aᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ᴄʜᴀɴɴᴇʟ ᴀꜱ ᴀᴅᴍɪɴɪꜱᴛʀᴀᴛᴏʀ, ᴡɪᴛʜ "ʙᴀɴ ᴜꜱᴇʀ" ᴘᴇʀᴍɪꜱꜱɪᴏɴ, ᴀɴᴅ ɪ ᴡɪʟʟ ɪɴꜱᴛᴀɴᴛʟʏ ꜱᴛᴀʀᴛ ᴍʏ ᴡᴏʀᴋ.'
+    button3 = Button.url('𝗔𝗱𝗱 𝗠𝗲 𝗧𝗼 𝗬𝗼𝘂𝗿 𝗖𝗵𝗮𝗻𝗻𝗲𝗹', 'https://t.me/LxtBanBot?startchannel=xAaYux&admin=invite_users+manage_chat')
     
     # Send the message with the image and buttons
     await client.send_file(event.chat_id, file=image_path, caption=caption2, buttons=[button3])
