@@ -6,16 +6,16 @@ import time
 # Replace the values below with your own API credentials
 api_id = 7630000
 api_hash = 'f70361ddf4ec755395b4b6f1ab2d4fae'
-bot_token = '5449793938:AAHfGttioxLqN2SnWHQevRFaljklaOo0WXg'
+bot_token = '6535562523:AAEF5h9Y6Z4UD_kvFu7oRPSJLJwm_WWBNf0'
 image_paths = ['image/img1.jpeg', 'image/img2.jpeg', 'image/img3.jpeg']
 
 # Create a TelegramClient instance
 client = TelegramClient('userbot_session', api_id, api_hash).start(bot_token=bot_token)
 
-# Function to send a message to the channel owner
-async def send_banned_user_message(channel_id, user_name):
+# Function to send a message to the user who added the bot
+async def send_banned_user_message(user_id, channel_id, user_name):
     message = f"The user {user_name} has been banned from your channel."
-    await client.send_message(channel_id, message)
+    await client.send_message(user_id, message)
 
 @client.on(events.ChatAction)
 async def handle_chat_action(event):
@@ -30,9 +30,9 @@ async def handle_chat_action(event):
             # Get information about the user who added the bot to their channel
             participants = await client.get_participants(event.chat_id)
             for participant in participants:
-                if participant.bot and participant.username == "LxTBanBot":
+                if participant.bot and participant.username == "your_bot_username":
                     # Send a message to the user who added the bot
-                    await send_banned_user_message(participant.id)
+                    await send_banned_user_message(participant.id, event.chat_id, participant.username)
                     break
                     
             time.sleep(4)
