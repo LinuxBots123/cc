@@ -12,6 +12,11 @@ image_paths = ['image/img1.jpeg', 'image/img2.jpeg', 'image/img3.jpeg']
 # Create a TelegramClient instance
 client = TelegramClient('userbot_session', api_id, api_hash).start(bot_token=bot_token)
 
+# Function to send a message to the channel owner
+async def send_banned_user_message(channel_id, user_name):
+    message = f"The user {user_name} has been banned from your channel."
+    await client.send_message(channel_id, message)
+
 @client.on(events.ChatAction)
 async def handle_chat_action(event):
     if event.user_joined:
@@ -21,11 +26,17 @@ async def handle_chat_action(event):
         try:
             await client.edit_permissions(event.chat_id, event.user_id, view_messages=False)
             print(f"Banned user: {event.user_id}")
+            # Get the channel ID from the event object
+            channel_id = event.chat_id
+            # Get the banned user's name from the event object (assuming it's available)
+            user_name = event.user.first_name if event.user.first_name else "Unknown User"
+            # Send a message to the channel owner with the banned user's name and channel name
+            await send_banned_user_message(channel_id, user_name)
             time.sleep(4)
         except Exception as e:
             print(f"Failed to ban user: {e}")
             time.sleep(4)
-
+            
 # Create a new TelegramClient instance
 @client.on(events.NewMessage(pattern='/start'))
 async def start(event):
