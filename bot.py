@@ -4,7 +4,7 @@ from telethon import Button
 api_id = 7630000
 api_hash = 'f70361ddf4ec755395b4b6f1ab2d4fae'
 bot_token = '5643920525:AAEk92b0py5yTVqqU6x8yFcGZWXRH-zXxhQ'
-image_paths = ['image/IMG_20221228_151355_100.jpg', 'path_to_image2.jpg', 'path_to_image3.jpg']
+image_paths = ['image/img1.jpeg', 'image/img2.jpeg', 'image/img3.jpeg']
 
 # Create a TelegramClient instance
 client = TelegramClient('userbot_session', api_id, api_hash).start(bot_token=bot_token)
