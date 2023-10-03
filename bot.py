@@ -1,5 +1,6 @@
 from telethon.sync import TelegramClient, events
 from telethon import Button
+import random
 # Replace the values below with your own API credentials
 api_id = 7630000
 api_hash = 'f70361ddf4ec755395b4b6f1ab2d4fae'
