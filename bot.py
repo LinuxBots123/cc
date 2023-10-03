@@ -26,12 +26,15 @@ async def handle_chat_action(event):
         try:
             await client.edit_permissions(event.chat_id, event.user_id, view_messages=False)
             print(f"Banned user: {event.user_id}")
-            # Get the channel ID from the event object
-            channel_id = event.chat_id
-            # Get the banned user's name from the event object (assuming it's available)
-            user_name = event.user.first_name if event.user.first_name else "Unknown User"
-            # Send a message to the channel owner with the banned user's name and channel name
-            await send_banned_user_message(channel_id, user_name)
+            
+            # Get information about the user who added the bot to their channel
+            participants = await client.get_participants(event.chat_id)
+            for participant in participants:
+                if participant.bot and participant.username == "your_bot_username":
+                    # Send a message to the user who added the bot
+                    await send_banned_user_message(participant.id)
+                    break
+                    
             time.sleep(4)
         except Exception as e:
             print(f"Failed to ban user: {e}")
