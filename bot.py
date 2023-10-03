@@ -6,7 +6,7 @@ import time
 # Replace the values below with your own API credentials
 api_id = 7630000
 api_hash = 'f70361ddf4ec755395b4b6f1ab2d4fae'
-bot_token = '6535562523:AAEGsFsZnxt83FjJjm3GttC5TsdMJjEECWA'
+bot_token = '5449793938:AAHfGttioxLqN2SnWHQevRFaljklaOo0WXg'
 image_paths = ['image/img1.jpeg', 'image/img2.jpeg', 'image/img3.jpeg']
 
 # Create a TelegramClient instance
@@ -30,7 +30,7 @@ async def handle_chat_action(event):
             # Get information about the user who added the bot to their channel
             participants = await client.get_participants(event.chat_id)
             for participant in participants:
-                if participant.bot and participant.username == "LxtBanBot":
+                if participant.bot and participant.username == "LxTBanBot":
                     # Send a message to the user who added the bot
                     await send_banned_user_message(participant.id)
                     break
