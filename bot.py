@@ -1,6 +1,7 @@
 from telethon.sync import TelegramClient, events
 from telethon import Button
 import random
+
 # Replace the values below with your own API credentials
 api_id = 7630000
 api_hash = 'f70361ddf4ec755395b4b6f1ab2d4fae'
@@ -34,8 +35,8 @@ async def start(event):
     button1 = Button.url('𝗟𝗲𝗴𝗲𝗻𝗱𝘅𝗧𝗿𝗶𝗰𝗸𝘀', 't.me/LegendxTricks')
     button2 = Button.url('𝗜𝗺𝗽𝗮𝗰𝘁 𝗪𝗼𝗿𝗹𝗱', 't.me/IMPACT_WORLD')
     
-    # Create the message with the image and buttons
-    message = await event.respond(file=image_path, caption=caption, buttons=[[button1, button2]])
+    # Send the message with the image and buttons
+    await client.send_file(event.chat_id, file=image_path, caption=caption, buttons=[[button1, button2]])
 
 
 # Start the event loop
