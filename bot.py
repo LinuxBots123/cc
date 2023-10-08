@@ -1,60 +1,39 @@
-from telethon.sync import TelegramClient, events
-from telethon import Button
-import random
-import time
+import logging
+from telegram import Update, ChatPermissions
+from telegram.ext import Updater, CommandHandler, CallbackContext, MessageHandler, Filters
 
-# Replace the values below with your own API credentials
-api_id = 7630000
-api_hash = 'f70361ddf4ec755395b4b6f1ab2d4fae'
-bot_token = '6535562523:AAE9uQzztSm75VgP_sGpPv85H-prEEAV39A'
-image_paths = ['image/img1.jpeg', 'image/img2.jpeg', 'image/img3.jpeg']
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
-# Create a TelegramClient instance
-client = TelegramClient('userbot_session', api_id, api_hash).start(bot_token=bot_token)
+TOKEN = 'YOUR_BOT_TOKEN'
 
-@client.on(events.ChatAction)
-async def handle_chat_action(event):
-    if event.user_joined:
-        print(f"User joined: {event.user_id}")
-    elif event.user_left:
-        print(f"User left: {event.user_id}")
-        try:
-            await client.edit_permissions(event.chat_id, event.user_id, view_messages=False)
-            print(f"Banned user: {event.user_id}")
-            time.sleep(4)
-        except Exception as e:
-            print(f"Failed to ban user: {e}")
-            time.sleep(4)
+updater = Updater(token=TOKEN, use_context=True)
+dispatcher = updater.dispatcher
 
-# Create a new TelegramClient instance
-@client.on(events.NewMessage(pattern='/start'))
-async def start(event):
-    # Path to the image file
-    image_path = random.choice(image_paths)
-    # Caption for the image
-    caption = 'Ｈｅｙ, Ｗｅｌｃｏｍｅ \n\nɪ ᴄᴀɴ ʙᴀɴ ᴜꜱᴇʀꜱ ᴡʜᴏ ʟᴇᴀᴠᴇꜱ ʏᴏᴜʀ ᴄʜᴀɴɴᴇʟ ɪɴ ʟᴇꜱꜱ ᴛʜᴇɴ 1ꜱᴇᴄ \n\nʜᴏᴡ ᴛᴏ ᴜꜱᴇ ᴛʜɪꜱ ʙᴏᴛ: /help'
-    
-    # Create the URL buttons
-    button1 = Button.url('𝗟𝗲𝗴𝗲𝗻𝗱𝘅𝗧𝗿𝗶𝗰𝗸𝘀', 't.me/LegendxTricks')
-    button2 = Button.url('𝗜𝗺𝗽𝗮𝗰𝘁 𝗪𝗼𝗿𝗹𝗱', 't.me/IMPACT_WORLD')
-    
-    # Send the message with the image and buttons
-    await client.send_file(event.chat_id, file=image_path, caption=caption, buttons=[[button1, button2]])
-    time.sleep(3)
-                             ####
+# Function to ban a user from the channel
+def ban_user(chat_id, user_id):
+    permissions = ChatPermissions(
+        can_send_messages=False,
+        can_send_media_messages=False,
+        can_send_polls=False,
+        can_send_other_messages=False,
+        can_add_web_page_previews=False,
+        can_change_info=False,
+        can_invite_users=False,
+        can_pin_messages=False
+    )
+    context.bot.restrict_chat_member(chat_id=chat_id, user_id=user_id, permissions=permissions)
 
-@client.on(events.NewMessage(pattern='/help'))
-async def help(event):
-    # Path to the image file
-    image_path = random.choice(image_paths)
-    # Caption for the image
-    caption2 = '𝗨𝘀𝗮𝗴𝗲 𝗶𝗻𝘀𝘁𝗿𝘂𝗰𝘁𝗶𝗼𝗻𝘀.\n\nAᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ᴄʜᴀɴɴᴇʟ ᴀꜱ ᴀᴅᴍɪɴɪꜱᴛʀᴀᴛᴏʀ, ᴡɪᴛʜ "ʙᴀɴ ᴜꜱᴇʀ" ᴘᴇʀᴍɪꜱꜱɪᴏɴ, ᴀɴᴅ ɪ ᴡɪʟʟ ɪɴꜱᴛᴀɴᴛʟʏ ꜱᴛᴀʀᴛ ᴍʏ ᴡᴏʀᴋ.'
-    button3 = Button.url('𝗔𝗱𝗱 𝗠𝗲 𝗧𝗼 𝗬𝗼𝘂𝗿 𝗖𝗵𝗮𝗻𝗻𝗲𝗹', 'https://t.me/LxtBanBot?startchannel=xAaYux&admin=invite_users+manage_chat')
-    
-    # Send the message with the image and buttons
-    await client.send_file(event.chat_id, file=image_path, caption=caption2, buttons=[button3])
+# Handler for 'left chat member' event
+def handle_left_chat_member(update: Update, context: CallbackContext):
+    if update.message.left_chat_member:
+        user_id = update.message.left_chat_member.id
+        chat_id = update.effective_chat.id
+        
+        ban_user(chat_id, user_id)
+        update.message.reply_text(f"User {user_id} has been banned.")
 
+left_chat_member_handler = MessageHandler(Filters.status_update.left_chat_member, handle_left_chat_member)
+dispatcher.add_handler(left_chat_member_handler)
 
-    time.sleep(3)
-# Start the event loop
-client.run_until_disconnected()
+updater.start_polling()
+￼Enter
