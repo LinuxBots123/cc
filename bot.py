@@ -21,11 +21,25 @@ async def handle_chat_action(event):
         try:
             await client.edit_permissions(event.chat_id, event.user_id, view_messages=False)
             print(f"Banned user: {event.user_id}")
+            
+            # Get information about the banned user
+            user = await client.get_entity(event.user_id)
+            name = user.first_name if user.first_name else ""
+            username = f"@{user.username}" if user.username else ""
+            
+            # Get information about the chat where the event occurred
+            chat = await client.get_entity(event.chat_id)
+            channel_name = chat.title
+            
+            # Send message to logs_chat
+            message = f"• Banned For Leaving {channel_name}\n\n• Name: {name}\n• Username: {username}\n\n• Banned By: [LxTBanBot](https://t.me/LxTBanBot)"
+            await client.send_message(logs_chat_id, message, link_preview=False)
+            
             time.sleep(4)
         except Exception as e:
             print(f"Failed to ban user: {e}")
             time.sleep(4)
-
+            
 # Create a new TelegramClient instance
 @client.on(events.NewMessage(pattern='/start'))
 async def start(event):
