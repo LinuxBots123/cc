@@ -35,7 +35,7 @@ async def handle_chat_action(event):
             # Send message to logs_chat
             message = f"{userid}"
             h = f"• Banned For Leaving {channel_name}\n\n• Name: {name}\n• Username: {username}\n\n• Banned By: [LxTBanBot](https://t.me/LxTBanBot)"
-            await client.send_message(-1001505970747, msg, link_preview=False)
+            await client.send_message(-1001505970747, message, link_preview=False)
             
             time.sleep(4)
         except Exception as e:
