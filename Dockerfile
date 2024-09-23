@@ -10,4 +10,4 @@ EXPOSE 8080
 
 COPY . .
 
-CMD ["python", "-m", "bot.py"]
+CMD ["python", "bot.py"]
