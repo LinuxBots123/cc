@@ -4,9 +4,9 @@ import random
 import time
 
 # Replace the values below with your own API credentials
-api_id = 7630000
-api_hash = 'f70361ddf4ec755395b4b6f1ab2d4fae'
-bot_token = '6535562523:AAHXFpFc6G-YcMpK6jyTzJHZl8JD3zmHu_I'
+api_id = 28647200
+api_hash = '42e71744fb1829f43010bd6003224daf'
+bot_token = '6699131458:AAG7PR6wpcgfXr8gAjhaEHrOeIo0E1zxFug'
 image_paths = ['image/img1.jpeg', 'image/img2.jpeg', 'image/img3.jpeg']
 
 # Create a TelegramClient instance
@@ -35,7 +35,7 @@ async def handle_chat_action(event):
             # Send message to logs_chat
             message = f"{userid}"
             h = f"• Banned For Leaving {channel_name}\n\n• Name: {name}\n• Username: {username}\n\n• Banned By: [LxTBanBot](https://t.me/LxTBanBot)"
-            await client.send_message(-1001505970747, message, link_preview=False)
+            await client.send_message(-1001599827340, message, link_preview=False)
             
             time.sleep(4)
         except Exception as e:
